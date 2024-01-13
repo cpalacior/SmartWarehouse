@@ -1,0 +1,134 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Perfil</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Nombre completo</label>
+                  <ng-container *ngIf="!isEditing; else editModeAdminName">
+                    <p>{{adminName}}</p>
+                  </ng-container>
+                  <ng-template #editModeAdminName>
+                    <input type="text" class="form-control" [(ngModel)]="adminName"
+                      [ngModelOptions]="{standalone: true}">
+                  </ng-template>
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Correo</label>
+                  <ng-container *ngIf="!isEditing; else editModeAdminEmail">
+                    <p>{{adminEmail}}</p>
+                  </ng-container>
+                  <ng-template #editModeAdminEmail>
+                    <input type="text" class="form-control" [(ngModel)]="adminEmail"
+                      [ngModelOptions]="{standalone: true}">
+                  </ng-template>
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Telefono</label>
+                  <ng-container *ngIf="!isEditing; else editModeAdminPhone">
+                    <p>{{adminPhone}}</p>
+                  </ng-container>
+                  <ng-template #editModeAdminPhone>
+                    <input type="text" class="form-control" [(ngModel)]="adminPhone"
+                      [ngModelOptions]="{standalone: true}">
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Dirección</label>
+                  <ng-container *ngIf="!isEditing; else editModeAdminAddress">
+                    <p>{{adminAddress}}</p>
+                  </ng-container>
+                  <ng-template #editModeAdminAddress>
+                    <input type="text" class="form-control" [(ngModel)]="adminAddress"
+                      [ngModelOptions]="{standalone: true}">
+                  </ng-template>
+                </div>
+              </div>
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label *ngIf="!isEditing">Contraseña</label>
+                  <ng-container *ngIf="!isEditing; else editModeAdminPassword">
+                    <p>********</p>
+                  </ng-container>
+                  <ng-template #editModeAdminPassword>
+                    <label for="">Editar contraseña</label>
+                    <input type="password" class="form-control" [(ngModel)]="adminPassword"
+                      [ngModelOptions]="{standalone: true}">
+
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Nombre de la bodega</label>
+                  <p>{{warehouseName}}</p>
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Ciudad</label>
+                  <p>{{warehouseLocation}}</p>
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Capacidad total</label>
+                  <p>{{warehouseSize}}m²</p>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-round mr-4" (click)="toggleEditMode()">
+              {{ isEditing ? 'Cancelar' : 'Editar' }}
+            </button>
+            <button type="button" class="btn btn-primary btn-round" *ngIf="isEditing" (click)="saveChanges()">
+              Confirmar
+            </button>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="../assets/img/bg5.jpg" alt="...">
+        </div>
+        <div class="card-body">
+          <div class="author mt-3">
+            <a>
+              <h5 class="title">{{adminName}}</h5>
+            </a>
+            <p class="description">
+              Administrador de bodega
+            </p>
+            <hr>
+            <p class="mt-3">Bodega: {{warehouseName}}</p>
+            <p>Ubicacion: {{warehouseLocation}}</p>
+            <p>Capacidad: {{warehouseSize}}m²</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

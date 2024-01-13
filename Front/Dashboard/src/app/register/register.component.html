@@ -1,0 +1,177 @@
+<body style="display: flex; align-items: center; justify-content: center;">
+    <div class="register-img"></div>
+    <div class="container-fluid register-container">
+        <div class="row">
+            <div class="col-md-7 left-side">
+                <h3>Regístrate</h3>
+                <p>Bienvenido</p>
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                    <div class="row justify-content-md-center">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="email" type="email" class="form-control" id="floatingEmail">
+                                <label for="floatingEmail">Correo</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('email').hasError('required') && !registerForm.get('email').pristine">
+                                    Email es obligatorio
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('email').hasError('email') && !registerForm.get('email').pristine">
+                                    Formato de email invalido
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="name" type="name" class="form-control" id="floatingName">
+                                <label for="floatingName">Nombre</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('name').hasError('required') && !registerForm.get('name').pristine">
+                                    Nombre es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="phone" type="phone" class="form-control" id="floatingPhone">
+                                <label for="floatingPhone">Celular</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('phone').hasError('required') && !registerForm.get('phone').pristine">
+                                    Numero de celular es obligatorio
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('phone').hasError('pattern') && !registerForm.get('phone').pristine">
+                                    Formato de celular invalido
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('phone').hasError('minlength') && !registerForm.get('phone').pristine">
+                                    Minimo 10 digitos
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="address" type="address" class="form-control"
+                                    id="floatingAdress">
+                                <label for="floatingAddress">Dirección</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('address').hasError('required') && !registerForm.get('address').pristine">
+                                    Direccion es obligatoria
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="password" type="password" class="form-control"
+                                    id="floatingPassword">
+                                <label for="floatingPassword">Contraseña</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('password').hasError('required') && !registerForm.get('password').pristine">
+                                    Contraseña es obligatoria
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('password').hasError('minlength') && !registerForm.get('password').pristine">
+                                    Minimo 8 caracteres
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('password').hasError('pattern') && !registerForm.get('password').pristine">
+                                    La contraseña debe tener por lo menos 1 mayuscula, 1 minuscula y 1 numero
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="confirmPassword" type="password" class="form-control"
+                                    id="floatingconfirmPassword">
+                                <label for="floatingconfirmPassword">Confirmar contraseña</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('confirmPassword').hasError('required') && !registerForm.get('confirmPassword').pristine">
+                                    Este campo es obligatorio
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('confirmPassword').hasError('mismatch') && !registerForm.get('confirmPassword').pristine">
+                                    Las contraseñas no coinciden
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Datos de la bodega</h4>
+                    <div class="row justify-content-md-center">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="warehouseName" type="text" class="form-control"
+                                    id="floatingWarehouseName">
+                                <label for="floatingWarehouseName">Nombre</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('warehouseName').hasError('required') && !registerForm.get('warehouseName').pristine">
+                                    Nombre de la bodega es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input formControlName="wareHouseSize" class="form-control" id="floatingWareHouseSize">
+                                <label for="floatingWareHouseSize">Capacidad(m²)</label>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('wareHouseSize').hasError('required') && !registerForm.get('wareHouseSize').pristine">
+                                    Capacidad de la bodega es obligatorio
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('wareHouseSize').hasError('pattern') && !registerForm.get('wareHouseSize').pristine">
+                                    La capacidad debe ser un numero
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-12">
+                            <div class="form-floating mb-2">
+                                <input formControlName="wareHouseLocation" type="text" class="form-control"
+                                    id="floatingWareHouseLocation">
+                                <label for="floatingWareHouseLocation">Ubicación</label>
+                            </div>
+                            <div class="col-12">
+                                <div class="alert alert-danger"
+                                    *ngIf="registerForm.get('wareHouseLocation').hasError('required') && !registerForm.get('wareHouseLocation').pristine">
+                                    Ubicacion de la bodega es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="registerForm.invalid" class="register-button">Regístrate</button>
+                </form>
+                <a style="text-align: start; color: #1E1E1E;" href=""><br><br> ¿Olvidaste tu contraseña?</a>
+            </div>
+            <div class="col-md-5 right-side">
+                <h3>Smart Warehouse</h3>
+                <p>Únete y experimenta la innovación en la gestión logística que impulsa tu éxito
+                    empresarial.<br><br></p>
+                <p class="mt-6"> ¿Ya tienes una cuenta?</p>
+                <button (click)="goToLogin()" class="register-register-button">Ingresa</button>
+
+
+            </div>
+
+        </div>
+    </div>
+</body>

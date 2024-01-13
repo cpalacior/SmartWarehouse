@@ -1,0 +1,60 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Estanterias</h5>
+        </div>
+
+
+        <div class="container mt-3">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-bordered table-striped centered-table">
+                <thead>
+                <tr>
+                  <th class="small-header" >Código</th>
+                  <th class="small-header" >Sección asociada</th>
+                  <th class="small-header" >Distancia a la puerta</th>
+                  <th class="small-header" >Fecha de creacion</th>
+                  <th class="small-header" >Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of dataset; let i = index">
+                  <ng-container *ngIf="i !== editableIndex; else editTemplate">
+                    <td>{{ item.code }}</td>
+                    <td>{{ getSectionName(item.SectionId) }}</td>
+                    <td>{{ item.distance_to_door }}</td>
+                    <td>{{ item.createdAt | date: 'dd/MM/yyyy' }}</td>
+                    <td class="button-container">
+                        <span (click)="editItem(i)" style="cursor: pointer;">
+                          <button type="button" class="btn btn-primary btn-round" >Editar</button>
+                        </span>
+                      <span (click)="confirmDelete(i)" style="cursor: pointer;">
+                          <button type="button" class="btn btn-danger btn-round" >Eliminar</button>
+                        </span>
+                    </td>
+                  </ng-container>
+                  <ng-template #editTemplate>
+                    <td>{{ item.code }}</td>
+                    <td>{{ getSectionName(item.SectionId) }}</td>
+                    <td><input type="text" class="form-control" [(ngModel)]="editedSlot.distance_to_door"></td>
+                    <td>{{ item.createdAt | date: 'dd/MM/yyyy' }}</td>
+                    <td class="button-container">
+                      <button type="button" class="btn btn-primary btn-round" (click)="saveItem(i)">Guardar</button>
+                      <button type="button" class="btn btn-danger btn-round" (click)="cancelEdit()">Cancelar</button>
+                    </td>
+                  </ng-template>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

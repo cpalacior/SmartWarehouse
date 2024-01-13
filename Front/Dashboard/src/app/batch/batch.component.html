@@ -1,0 +1,102 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ingreso de lotes</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-group col-4">
+                <label for="number_of_packages">Numero de Paquetes</label>
+                <input type="number" class="form-control" id="number_of_packages" formControlName="number_of_packages" placeholder="Numero de paquetes" max="25">
+              </div>
+              <div class="form-group col-4">
+                <label for="weight">Peso Total (kg)</label>
+                <input type="number" class="form-control" id="weight" formControlName="weight" placeholder="Peso (kg)">
+              </div>
+              <div class="form-group col-4">
+                <label for="input_date">Fecha de ingreso</label>
+                <input type="date" class="form-control" id="input_date" formControlName="input_date">
+              </div>
+            </div>
+
+            <h5 class="title">Paquetes</h5>
+            <h6 class="small-text">Campos obligatorios <span class="required-asterisk">*</span></h6>
+
+
+
+            <!-- ... -->
+            <div formArrayName="additionalRows">
+              <div class="table-responsive">
+                <table class="table table-bordered centered-table">
+                  <thead>
+                  <tr>
+                    <th class="small-header">Peso (kg) <span class="required-asterisk">*</span></th>
+                    <th class="small-header">Largo (m) <span class="required-asterisk">*</span></th>
+                    <th class="small-header">Ancho (m) <span class="required-asterisk">*</span></th>
+                    <th class="small-header">Alto (m) <span class="required-asterisk">*</span></th>
+                    <th class="small-header">Categoria<span class="required-asterisk">*</span></th>
+                    <th class="small-header">Fecha de salida</th>
+                    <th class="small-header">Fecha de vencimiento</th>
+                    <th class="small-header">Apilable</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let row of additionalRows.controls; let i = index" [formGroupName]="i">
+                    <td>
+                      <input type="number" class="form-control" [id]="'weight' + i" formControlName="weight">
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" [id]="'depth' + i" formControlName="depth">
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" [id]="'width' + i" formControlName="width">
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" [id]="'height' + i" formControlName="height">
+                    </td>
+                    <td>
+                      <select class="form-control" [id]="'category' + i" formControlName="category">
+                        <option value="Alimentos">Alimentos</option>
+                        <option value="Textiles">Textiles</option>
+                        <option value="Electrónicos">Electronicos</option>
+                        <option value="Productos de limpieza">Productos de limpieza</option>
+                        <option value="Frágil">Fragil</option>
+                        <option value="Farmacéuticos">Farmaceuticos</option>
+                        <option value="Suministros para mascotas">Suministros para mascotas</option>
+                        <option value="Agricultura">Agricultura</option>
+                        <option value="Productos químicos">Productos quimicos</option>
+                        <option value="Materiales de construcción">Materiales de construccion</option>
+                        <option value="Otros">Otros</option>
+                      </select>
+                    </td>
+                    <td>
+                      <input type="date" class="form-control" [id]="'output_date' + i" formControlName="output_date" [min]="form.get('input_date').value">
+
+                    </td>
+                    <td>
+                      <input type="date" class="form-control" [id]="'expiration_date' + i" formControlName="expiration_date" [min]="form.get('input_date').value">
+                    </td>
+                    <td>
+                      <input type="checkbox" class="form-control" [id]="'overlap' + i" formControlName="overlap">
+                    </td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- ... -->
+
+
+            <button type="submit" class="btn btn-primary btn-round">Ingresar lote</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

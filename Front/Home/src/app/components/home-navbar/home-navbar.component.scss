@@ -1,0 +1,39 @@
+html,
+body {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0;
+}
+
+.navBar {
+  color: white;
+  background-color: #1B0440;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  z-index: 999999999;
+
+  img {
+    margin-left: 20px;
+    position: absolute;
+    top: 7px;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    margin-right: 20px;
+
+    &:hover {
+      color: mediumseagreen;
+      cursor: pointer;
+    }
+  }
+
+}

@@ -1,0 +1,124 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Secciones</h5>
+        </div>
+        <div class="card-body">
+          <form style="width: 100%;">
+            <div class="form-row">
+              <div class="form-group col-3">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre" [(ngModel)]="name">
+              </div>
+              <div class="form-group col-3">
+                <label for="largo">Largo</label>
+                <input type="number" step="0.01" class="form-control" id="largo" placeholder="Largo (m)"
+                  [(ngModel)]="depth">
+              </div>
+              <div class="form-group col-3">
+                <label for="ancho">Ancho</label>
+                <input type="number" step="0.01" class="form-control" id="ancho" placeholder="Ancho (m)"
+                  [(ngModel)]="width">
+              </div>
+
+              <div class="form-group col-3">
+                <label for="ancho">Estanterias asociadas</label>
+                <input type="number" class="form-control" id="estanterias" placeholder="N° de estanterias"
+                  [(ngModel)]="num_of_slots">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-round" data-toggle="modal" data-target="#exampleModal"
+              (click)="openModal(); generateSections()">Ingresar seccion</button>
+          </form>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title title" id="exampleModalLabel">Estanterías</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div *ngFor="let i of [].constructor(distanciaPuertaRows); let index = index" class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="campoSoloLectura">Numéro de estanteria</label>
+                      <input type="text" class="form-control" id="num_of_slots" placeholder="{{ index + 1 }}" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="distanciaPuerta">Distancia a la puerta</label>
+                      <input type="number" class="form-control" id="distanceToDoor" placeholder="(m)"
+                        [(ngModel)]="distanciaPuertaData[index]">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btn-round" (click)="sendData()">Ingresar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container mt-3">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-bordered table-striped centered-table">
+                <thead>
+                  <tr>
+                    <th class="small-header">Código</th>
+                    <th class="small-header">Nombre</th>
+                    <th class="small-header">Largo (m)</th>
+                    <th class="small-header">Ancho (m)</th>
+                    <th class="small-header">N° de estanterias</th>
+                    <th class="small-header">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of dataset; let i = index">
+                    <ng-container *ngIf="i !== editableIndex; else editTemplate">
+                      <td>{{ item.code }}</td>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.width }}</td>
+                      <td>{{ item.depth }}</td>
+                      <td>{{ item.num_of_slots }}</td>
+                      <td class="button-container">
+                        <span (click)="editItem(i)" style="cursor: pointer;">
+                          <button type="button" class="btn btn-primary btn-round">Editar</button>
+                        </span>
+                        <span (click)="confirmDelete(i)" style="cursor: pointer;">
+                          <button type="button" class="btn btn-danger btn-round">Eliminar</button>
+                        </span>
+                      </td>
+                    </ng-container>
+                    <ng-template #editTemplate>
+                      <td>{{ item.code }}</td>
+                      <td><input type="text" class="form-control" [(ngModel)]="editedSection.name"></td>
+                      <td><input type="text" class="form-control" [(ngModel)]="editedSection.width"></td>
+                      <td><input type="text" class="form-control" [(ngModel)]="editedSection.depth"></td>
+                      <td><input type="text" class="form-control" [(ngModel)]="editedSection.num_of_slots"></td>
+                      <td class="button-container">
+                        <button type="button" class="btn btn-primary btn-round" (click)="saveItem(i)">Guardar</button>
+                        <button type="button" class="btn btn-danger btn-round" (click)="cancelEdit()">Cancelar</button>
+                      </td>
+                    </ng-template>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

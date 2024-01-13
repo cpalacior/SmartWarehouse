@@ -1,0 +1,9 @@
+.small-header {
+  font-size: 14px;
+  font-weight: 600;
+  width: 5%
+}
+
+.centered-table th, .centered-table td {
+  text-align: center;
+}

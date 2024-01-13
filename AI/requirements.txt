@@ -1,0 +1,4 @@
+pulp
+pymongo
+requests
+flask-cors
